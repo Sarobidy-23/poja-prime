@@ -1,10 +1,9 @@
   package com.poja.prime.service.event;
 
-  import com.poja.prime.endpoint.event.gen.UuidCreated;
-  import com.poja.prime.repository.DummyUuidRepository;
   import com.poja.prime.repository.PrimeRepository;
   import com.poja.prime.repository.model.Prime;
   import java.math.BigInteger;
+  import java.util.List;
   import java.util.Random;
   import java.util.UUID;
   import lombok.AllArgsConstructor;
@@ -21,5 +20,8 @@
           .id(UUID.randomUUID().toString())
           .value(BigInteger.probablePrime(PRIME_BITS, new Random()).toString())
           .build());
+    }
+    public List<Prime> getLast() {
+      return repository.findTop10ByOrderByCreationDatetimeDesc();
     }
   }
